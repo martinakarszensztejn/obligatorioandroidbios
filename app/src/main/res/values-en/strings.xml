@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Obligatorio v0.1</string>
+    <string name="app_name">Obligatorio</string>
     <string name="titulo_inicio">Welcome! If you already have an account, log in, if not, please register.</string>
     <string name="iniciar_sesion_caps">Log in</string>
     <string name="registrarse_caps">Register</string>

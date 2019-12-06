@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Obligatorio v0.1</string>
+    <string name="app_name">Obligatorio</string>
     <string name="titulo_inicio">Bienvenido! Si ya posee cuenta inicie sesión, sino, regístrese.</string>
     <string name="iniciar_sesion_caps">Iniciar Sesión</string>
     <string name="registrarse_caps">Registrarse</string>
