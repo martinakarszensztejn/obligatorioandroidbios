@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Obligatorio v0.1</string>
+    <string name="titulo_inicio">Welcome! If you already have an account, log in, if not, please register.</string>
+    <string name="iniciar_sesion_caps">Log in</string>
+    <string name="registrarse_caps">Register</string>
+    <string name="email">E-mail:</string>
+    <string name="nombre">Name</string>
+    <string name="apellido">Last Name</string>
+    <string name="contraseña">Password</string>
+    <string name="enviar">Send</string>
+    <string name="exitos">Success!</string>
+    <string name="mensajeRegistroExitoso">A new user has been successfully registered.</string>
+    <string name="aceptar">Accept</string>
+    <string name="errorRegistro">An error has occurred during the registration process</string>
+    <string name="error">Error</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="pleaseLogIn">Please, Log in.</string>
+    <string name="usuarioExitoso">Bienvenido!!!!</string>
+    <string name="errorDeTimeoutEnLogin">The server was not able to proccess the request. Please try again later. (Timeout Error)</string>
+    <string name="usuarioOContraseñaIncorrecta">Either the user or the password do not match. Please try again.</string>
+    <string name="title_activity_hub">HubActivity</string>
+    <string name="mantener">Keep me loged in</string>
+    <string name="cerrarsesion">Log out</string>
+    <string name="id">ID: </string>
+    <string name="fecha">DATE: </string>
+    <string name="estado">STATUS: </string>
+    <string name="estaSeguroCerrarSesion">Are you sure you would like to log out?</string>
+    <string name="cancelar">Cancel</string>
+    <string name="salir">Leave</string>
+
+    <string name="origen">ORIGIN:</string>
+    <string name="cargando">Loading...</string>
+    <string name="cargando_2">Loading. Please stand by.</string>
+    <string name="errorFatalDeConexion">A fatal error has occurred while obtaining data from the server. Please chech your connection and try again.</string>
+    <string name="destino">DESTINATION:</string>
+    <string name="title_activity_mapa_general">General Map</string>
+    <string name="reminder">Swipe right on the screens bottom to see the map with all the transportations</string>
+
+</resources>

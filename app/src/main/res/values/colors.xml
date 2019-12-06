@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorBackground">#99AF94DF</color>
+    <color name="colorActionBar">#321364</color>
+    <color name="colorNegro">#000000</color>
+    <color name="colorRVHub0">#E68EAF</color>
+</resources>

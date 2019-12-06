@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Obligatorio v0.1</string>
+    <string name="titulo_inicio">Bienvenido! Si ya posee cuenta inicie sesión, sino, regístrese.</string>
+    <string name="iniciar_sesion_caps">Iniciar Sesión</string>
+    <string name="registrarse_caps">Registrarse</string>
+    <string name="email">E-mail:</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="enviar">Enviar</string>
+    <string name="exitos">Éxitos!</string>
+    <string name="mensajeRegistroExitoso">Se ha registrado un usuario correctamente.</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="errorRegistro">Error en el Registro</string>
+    <string name="error">Error</string>
+    <string name="pleaseLogIn">Estimado usuario, por favor inicie sesión</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="usuarioExitoso">Bienvenido!!!!</string>
+    <string name="errorDeTimeoutEnLogin">El servidor no pudo procesar su solicitud. Por favor intente más tarde. (Timeout Error)</string>
+    <string name="usuarioOContraseñaIncorrecta">El usuario o la contraseña no coinciden. Por favor reintente ingresar sus credenciales.</string>
+    <string name="title_activity_hub">HubActivity</string>
+    <string name="mantener">Mantener sesión iniciada</string>
+    <string name="cerrarsesion">Cerrar Sesión</string>
+    <string name="id">ID: </string>
+    <string name="fecha">FECHA: </string>
+    <string name="estado">ESTADO: </string>
+    <string name="estaSeguroCerrarSesion">¿Está seguro que desea cerrar sesión?</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="salir">Salir</string>
+    <string name="origen">ORIGEN:</string>
+    <string name="destino">DESTINO:</string>
+    <string name="cargando">Cargando...</string>
+    <string name="cargando_2">Cargando. Por favor espere.</string>
+    <string name="errorFatalDeConexion">Ha ocurrido un error fatal obteniendo los datos del servidor. Por favor revise su conexión y reinténtelo</string>
+    <string name="title_activity_mapa_general">Mapa General</string>
+    <string name="reminder">Deslize a la derecha sobre el inferior de la pantalla para ver el mapa de traslados</string>
+</resources>
