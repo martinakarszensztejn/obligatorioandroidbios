@@ -1,0 +1,8 @@
+<keymap version="1" name="Default copy" parent="$default">
+  <action id="CheckinFiles">
+    <keyboard-shortcut first-keystroke="shift ctrl f11" />
+  </action>
+  <action id="Show.Current.Revision">
+    <keyboard-shortcut first-keystroke="ctrl alt num_lock" />
+  </action>
+</keymap>
