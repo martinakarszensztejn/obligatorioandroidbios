@@ -17,9 +17,12 @@ import com.martina.obligatoriov0_1.HubActivity;
 import com.martina.obligatoriov0_1.MapaGeneralActivity;
 import com.martina.obligatoriov0_1.R;
 import com.martina.obligatoriov0_1.constantes.Constantes;
+import com.martina.obligatoriov0_1.database.DatabaseHelper;
+import com.martina.obligatoriov0_1.database.stDatabase;
 import com.martina.obligatoriov0_1.metodos.MetodosHub;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.util.List;
 
 
@@ -114,6 +117,9 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(view.getContext(), MapaGeneralActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    stDatabase asd = new stDatabase(view.getContext());
+                    asd.guardar(idList.get(0),estadoList.get(0),origenList.get(0));
+
                     intent.putExtra(Constantes.ID_LIST_EXTRA_INTENT, (Serializable)idList);
                     view.getContext().startActivity(intent);
 
