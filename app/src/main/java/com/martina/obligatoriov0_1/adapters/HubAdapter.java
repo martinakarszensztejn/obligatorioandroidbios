@@ -2,27 +2,23 @@ package com.martina.obligatoriov0_1.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.martina.obligatoriov0_1.DetalleActivity;
-import com.martina.obligatoriov0_1.HubActivity;
 import com.martina.obligatoriov0_1.MapaGeneralActivity;
 import com.martina.obligatoriov0_1.R;
 import com.martina.obligatoriov0_1.constantes.Constantes;
-import com.martina.obligatoriov0_1.database.DatabaseHelper;
 import com.martina.obligatoriov0_1.database.stDatabase;
-import com.martina.obligatoriov0_1.metodos.MetodosHub;
+import com.martina.obligatoriov0_1.metodos.MetodosDetalle;
 
 import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.util.List;
 
 
@@ -97,6 +93,18 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
 
             holder.lbl_Estado.setText(String.valueOf(current_estado));
             holder.lbl_Origen.setText(String.valueOf(current_origen));
+
+
+            if(idList.size()>1){
+                stDatabase asd = new stDatabase(holder.itemView.getContext());
+                for (int i = 0; i < idList.size(); i++) {
+                    asd.setst(idList.get(i), estadoList.get(i), origenList.get(i));
+//                    asd.updatest(idList.get(i),estadoList.get(i),origenList.get(i));
+                }
+
+            }
+
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -104,10 +112,8 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
                         onItemSelectedListener.onItemSelected(position, current_id);
                     }
                     int id = idList.get(position);
-                    Intent intent = new Intent(v.getContext(), DetalleActivity.class);
-                    intent.putExtra(Constantes.ID_SELECCIONADA,id);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    v.getContext().startActivity(intent);
+                    Log.i(Constantes.INFORMACION,"Se clickeo la vista");
+                    MetodosDetalle.getDetailedTransportation(itemView.getContext(),id);
 
 
                 }
@@ -117,8 +123,10 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
                 public boolean onLongClick(View view) {
                     Intent intent = new Intent(view.getContext(), MapaGeneralActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    stDatabase asd = new stDatabase(view.getContext());
-                    asd.guardar(idList.get(0),estadoList.get(0),origenList.get(0));
+
+
+
+
 
                     intent.putExtra(Constantes.ID_LIST_EXTRA_INTENT, (Serializable)idList);
                     view.getContext().startActivity(intent);
@@ -126,6 +134,7 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
                     return false;
                 }
             });
+
 
         }
 

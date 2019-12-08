@@ -9,6 +9,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.martina.obligatoriov0_1.asincrono.AutoRetryHub;
+import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.FullTransportationListBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.RetryHubBroadcastReceiver;
@@ -18,21 +19,17 @@ import com.martina.obligatoriov0_1.metodos.MetodosHub;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.Serializable;
-import java.text.CollationElementIterator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +49,7 @@ public class HubActivity extends AppCompatActivity implements Serializable {
     private RetryHubBroadcastReceiver MBreccc = new RetryHubBroadcastReceiver();
     private FullTransportationListBroadcastReceiver MBRecc = new FullTransportationListBroadcastReceiver();
     public static ProgressBar progressBar_hub;
+
 
 
 
@@ -127,23 +125,17 @@ public class HubActivity extends AppCompatActivity implements Serializable {
         task.execute(progressBar_hub.getVisibility(),null,null);
         Log.i(Constantes.INFORMACION,"ESTADO DE LA PB"+String.valueOf(progressBar_hub.getVisibility()));
 
+        DetalleBroadcastReceiver mybr = new DetalleBroadcastReceiver();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mybr, new IntentFilter(
+                Constantes.FILTRO_INTENT_TRANSPORTATION_DETALLADA));
 
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         if (getIntent().getStringExtra(Constantes.EMAIL_EXTRA_INTENT) != null) {
             String email = getIntent().getStringExtra(Constantes.EMAIL_EXTRA_INTENT);
 
         }
         SharedPreferences sharedPreferences = getSharedPreferences(Constantes.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
         String email_user_logeado = sharedPreferences.getString(Constantes.EMAIL_SESION_INICIADA, null);
-
 
 
 

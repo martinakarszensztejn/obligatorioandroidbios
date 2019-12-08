@@ -122,17 +122,22 @@ public class MetodosHub implements Serializable {
             pedido.setOrigen_direccion(CompleteTransportation.getString("origen_direccion"));
             pedido.setOrigen_latitud(CompleteTransportation.getInt("origen_latitud"));
             pedido.setOrigen_longitud(CompleteTransportation.getInt("origen_longitud"));
-            pedido.setRecepcion_fecha(CompleteTransportation.getString("recepcion_fecha"));
 
-            pedido.setRecepcion_nombre_receptor(CompleteTransportation.getString("recepcion_nombre_receptor"));
-            pedido.setRecepcion_observacion(CompleteTransportation.getString("recepcion_observacion"));
-            pedido.setVehiculo_chofer(CompleteTransportation.getString("vehiculo_chofer"));
-            pedido.setVehiculo_marca(CompleteTransportation.getString("vehiculo_marca"));
-            pedido.setVehiculo_modelo(CompleteTransportation.getString("vehiculo_modelo"));
-            pedido.setVehiculo_matricula(CompleteTransportation.getString("vehiculo_matricula"));
-            pedido.setRecepcion_latitud(CompleteTransportation.getString("recepcion_latitud"));
-            pedido.setRecepcion_longitud(CompleteTransportation.getString("recepcion_longitud"));
+           if(CompleteTransportation.getString("estado").equals("iniciado")||CompleteTransportation.getString("estado").equals("cargando")||CompleteTransportation.getString("estado").equals("viajando")||CompleteTransportation.getString("estado").equals("viajando")||CompleteTransportation.getString("estado").equals("descargando")||CompleteTransportation.getString("estado").equals("finalizado")) {
+                pedido.setVehiculo_chofer(CompleteTransportation.getString("vehiculo_chofer"));
+                pedido.setVehiculo_marca(CompleteTransportation.getString("vehiculo_marca"));
+                pedido.setVehiculo_modelo(CompleteTransportation.getString("vehiculo_modelo"));
+                pedido.setVehiculo_matricula(CompleteTransportation.getString("vehiculo_matricula"));
 
+           }
+           if(CompleteTransportation.getString("estado").equals("finalizado")){
+               pedido.setRecepcion_fecha(CompleteTransportation.getString("recepcion_fecha"));
+
+               pedido.setRecepcion_nombre_receptor(CompleteTransportation.getString("recepcion_nombre_receptor"));
+               pedido.setRecepcion_observacion(CompleteTransportation.getString("recepcion_observacion"));
+               pedido.setRecepcion_latitud(CompleteTransportation.getDouble("recepcion_latitud"));
+               pedido.setRecepcion_longitud(CompleteTransportation.getDouble("recepcion_longitud"));
+           }
 
 
         } catch (JSONException e) {
@@ -201,7 +206,7 @@ public class MetodosHub implements Serializable {
 
             for (int i = 0; i < HubBroadcastReceiver.simpleTransportationList.size(); i++) {
                 int id = HubBroadcastReceiver.simpleTransportationList.get(i).getId();
-                Log.i(Constantes.INFORMACION,"La id es "+String.valueOf(id));
+
                 listaID.add(id);
                 String estado = HubBroadcastReceiver.simpleTransportationList.get(i).getEstado();
                 listaEstado.add(estado);
@@ -229,6 +234,7 @@ public class MetodosHub implements Serializable {
 
 
     }
+
 
 
 }

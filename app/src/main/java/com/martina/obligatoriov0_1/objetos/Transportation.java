@@ -6,11 +6,11 @@ public class Transportation {
     private String estado;
     private String fecha;
     private String origen_direccion;
-    private int origen_latitud;
-    private int origen_longitud;
+    private double origen_latitud;
+    private double origen_longitud;
     private String destino_direccion;
-    private int destino_latitud;
-    private int destino_longitud;
+    private double destino_latitud;
+    private double destino_longitud;
     private String vehiculo_marca;
     private String vehiculo_modelo;
     private String vehiculo_matricula;
@@ -18,11 +18,57 @@ public class Transportation {
     private String recepcion_nombre_receptor;
     private String recepcion_observacion;
     private String recepcion_fecha;
-    private String recepcion_latitud;
-    private String recepcion_longitud;
+    private double recepcion_latitud;
+    private double recepcion_longitud;
 
 
+    public double getOrigen_latitud() {
+        return origen_latitud;
+    }
 
+    public void setOrigen_latitud(double origen_latitud) {
+        this.origen_latitud = origen_latitud;
+    }
+
+    public double getOrigen_longitud() {
+        return origen_longitud;
+    }
+
+    public void setOrigen_longitud(double origen_longitud) {
+        this.origen_longitud = origen_longitud;
+    }
+
+    public double getDestino_latitud() {
+        return destino_latitud;
+    }
+
+    public void setDestino_latitud(double destino_latitud) {
+        this.destino_latitud = destino_latitud;
+    }
+
+    public double getDestino_longitud() {
+        return destino_longitud;
+    }
+
+    public void setDestino_longitud(double destino_longitud) {
+        this.destino_longitud = destino_longitud;
+    }
+
+    public double getRecepcion_latitud() {
+        return recepcion_latitud;
+    }
+
+    public void setRecepcion_latitud(double recepcion_latitud) {
+        this.recepcion_latitud = recepcion_latitud;
+    }
+
+    public double getRecepcion_longitud() {
+        return recepcion_longitud;
+    }
+
+    public void setRecepcion_longitud(double recepcion_longitud) {
+        this.recepcion_longitud = recepcion_longitud;
+    }
 
     public int getId() {
         return id;
@@ -56,21 +102,13 @@ public class Transportation {
         this.origen_direccion = origen_direccion;
     }
 
-    public int getOrigen_latitud() {
-        return origen_latitud;
-    }
 
-    public void setOrigen_latitud(int origen_latitud) {
-        this.origen_latitud = origen_latitud;
-    }
 
-    public int getOrigen_longitud() {
-        return origen_longitud;
-    }
 
-    public void setOrigen_longitud(int origen_longitud) {
-        this.origen_longitud = origen_longitud;
-    }
+
+
+
+
 
     public String getDestino_direccion() {
         return destino_direccion;
@@ -80,21 +118,7 @@ public class Transportation {
         this.destino_direccion = destino_direccion;
     }
 
-    public int getDestino_latitud() {
-        return destino_latitud;
-    }
 
-    public void setDestino_latitud(int destino_latitud) {
-        this.destino_latitud = destino_latitud;
-    }
-
-    public int getDestino_longitud() {
-        return destino_longitud;
-    }
-
-    public void setDestino_longitud(int destino_longitud) {
-        this.destino_longitud = destino_longitud;
-    }
 
     public String getVehiculo_marca() {
         return vehiculo_marca;
@@ -153,19 +177,5 @@ public class Transportation {
         this.vehiculo_matricula = vehiculo_matricula;
     }
 
-    public String getRecepcion_latitud() {
-        return recepcion_latitud;
-    }
 
-    public void setRecepcion_latitud(String recepcion_latitud) {
-        this.recepcion_latitud = recepcion_latitud;
-    }
-
-    public String getRecepcion_longitud() {
-        return recepcion_longitud;
-    }
-
-    public void setRecepcion_longitud(String recepcion_longitud) {
-        this.recepcion_longitud = recepcion_longitud;
-    }
 }

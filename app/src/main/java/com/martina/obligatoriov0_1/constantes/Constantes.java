@@ -20,6 +20,27 @@ public class Constantes {
     public static final String ERROR_OTHERS = "ERROR_OTHERS";
     public static final String BROADCAST_RETRY_HUB = "com.martina.obligatoriov0_1.BROADCAST_RETRY_HUB";
     public static final String ID_LIST_EXTRA_INTENT = "com.martina.obligatoriov0_1.ID_LIST_EXTRA_INTENT ";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT = "com.martina.obligatoriov0_1.TRANSPORTATION_DETALLADA_EXTRA_INTENT";
+    public static final String FILTRO_INTENT_TRANSPORTATION_DETALLADA = "com.martina.obligatoriov0_1.FILTRO_INTENT_TRANSPORTATION_DETALLADA";
+    public static final String EXTRA_INTENT_TRANSPORTATION_DETALLADA = "com.martina.obligatoriov0_1.EXTRA_INTENT_TRANSPORTATION_DETALLADA";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_DD = "com.martina.obligatoriov0_1.destino_direccion";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_ID = "com.martina.obligatoriov0_1.id";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_DLAT = "com.martina.obligatoriov0_1.destino_lat";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_DLONG = "com.martina.obligatoriov0_1.destino_long;";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_STATUS = "com.martina.obligatoriov0_1.ESTADO";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_DATE = "com.martina.obligatoriov0_1.FECHA";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_OD = "com.martina.obligatoriov0_1.ORIGEN_DIRECCION";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_OLAT = "com.martina.obligatoriov0_1.ORIGEN_LAT";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_OLONG = "com.martina.obligatoriov0_1.ORIGEN_LONG";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_VC = "com.martina.obligatoriov0_1.VEHICULO_CHOFER";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_VMAR = "com.martina.obligatoriov0_1.VEHICULO_MARCA";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_VMAT = "com.martina.obligatoriov0_1.VECHICULO_MATRICULA";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_VMODEL = "com.martina.obligatoriov0_1.VEHICULO_MODELO";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_RDATE = "com.martina.obligatoriov0_1.RECEPCION_FECHA";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_RLAT = "com.martina.obligatoriov0_1.RECEPCION_LATITUD";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_RLONG ="com.martina.obligatoriov0_1.RECEPCION_LONGITUD";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_RNAME = "com.martina.obligatoriov0_1.RECEPCION_NOMBRE_RECEPTOR";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_ROBS = "com.martina.obligatoriov0_1.RECEPCION_OBSERVACIONES";
     public static int CURRENT_DATABASE_VERSION = 1;
     public static String DATABASE_NAME = "mydb";
 }

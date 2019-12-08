@@ -22,7 +22,7 @@ public class stDatabase {
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         String stringid = String.valueOf(id);
         String[] idor = new String[] {stringid};
-        Cursor cursor = db.rawQuery(" SELECT * FROM contacto WHERE id=?;", idor);
+        Cursor cursor = db.rawQuery(" SELECT * FROM st WHERE id=?;", idor);
         if (cursor.moveToFirst()) {
 
             String origen = cursor.getString(1);
@@ -43,7 +43,7 @@ public class stDatabase {
         DatabaseHelper databaseHelper = new DatabaseHelper(contexto);
         SQLiteDatabase db = databaseHelper.getReadableDatabase();
         List<SimpleTransportation> resultList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT * FROM contacto;", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM st;", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -62,17 +62,32 @@ public class stDatabase {
         databaseHelper.close();
         return resultList;
     }
-    public void guardar(int id, String estado, String origen) {
-        DatabaseHelper databaseHelper = new DatabaseHelper(contexto);
-        SQLiteDatabase db = databaseHelper.getWritableDatabase();
-        ContentValues valores = new ContentValues();
-        valores.put("id", id);
-        valores.put("origen", origen);
-        valores.put("estado", estado);
-        db.insert("st", null, valores);
+    public void setst(int id, String estado, String origen) {
+        DatabaseHelper dh = new DatabaseHelper(contexto);
+        SQLiteDatabase db = dh.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("id", id);
+        values.put("origen", origen);
+        values.put("estado", estado);
+        db.insertWithOnConflict("st", null, values,SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
-        databaseHelper.close();
+        dh.close();
     }
+//    public void updatest(int id_new, String estado_new, String origen_new){
+//        DatabaseHelper dh = new DatabaseHelper(contexto);
+//        SQLiteDatabase db = dh.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("id_new",id_new);
+//        values.put("origen_new", origen_new);
+//        values.put("estado_new",estado_new);
+//        String[] argu = new String[1];
+//        argu[0]=String.valueOf(id_new);
+//        db.update("st",values,"ID = ?",argu);
+//        db.close();
+//        dh.close();
+//
+//    }
+
 
 
 }
