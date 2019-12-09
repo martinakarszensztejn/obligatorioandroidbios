@@ -22,6 +22,7 @@
     <string name="mantener">Mantener sesión iniciada</string>
     <string name="cerrarsesion">Cerrar Sesión</string>
     <string name="id">ID: </string>
+    <string name="preferencias">Preferencias </string>
     <string name="fecha">FECHA: </string>
     <string name="estado">ESTADO: </string>
     <string name="estaSeguroCerrarSesion">¿Está seguro que desea cerrar sesión?</string>
@@ -33,5 +34,5 @@
     <string name="cargando_2">Cargando. Por favor espere.</string>
     <string name="errorFatalDeConexion">Ha ocurrido un error fatal obteniendo los datos del servidor. Por favor revise su conexión y reinténtelo</string>
     <string name="title_activity_mapa_general">Mapa General</string>
-    <string name="reminder">Deslize a la derecha sobre el inferior de la pantalla para ver el mapa de traslados</string>
+    <string name="reminder">Presione el pedido para ver sus detalles y trabajar con él, mantenga presionada la lista para ver el mapa de pedidos.</string>
 </resources>

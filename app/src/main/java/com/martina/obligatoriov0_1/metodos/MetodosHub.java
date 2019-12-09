@@ -171,6 +171,8 @@ public class MetodosHub implements Serializable {
 
                 simpleTransportation.setEstado(transportation.getString("estado"));
                 simpleTransportation.setOrigen(transportation.getString("origen_direccion"));
+                simpleTransportation.setOrigen_lat(transportation.getDouble("origen_latitud"));
+                simpleTransportation.setOrigen_long(transportation.getDouble("origen_longitud"));
 
 
 

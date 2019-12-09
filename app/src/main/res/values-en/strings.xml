@@ -9,6 +9,7 @@
     <string name="apellido">Last Name</string>
     <string name="contraseña">Password</string>
     <string name="enviar">Send</string>
+    <string name="preferencias">Preferences</string>
     <string name="exitos">Success!</string>
     <string name="mensajeRegistroExitoso">A new user has been successfully registered.</string>
     <string name="aceptar">Accept</string>
@@ -35,6 +36,6 @@
     <string name="errorFatalDeConexion">A fatal error has occurred while obtaining data from the server. Please chech your connection and try again.</string>
     <string name="destino">DESTINATION:</string>
     <string name="title_activity_mapa_general">General Map</string>
-    <string name="reminder">Swipe right on the screens bottom to see the map with all the transportations</string>
+    <string name="reminder">Simple Press any transportation to see its details and work with it, or longpress the list to view the map with all the transportations</string>
 
 </resources>

@@ -37,6 +37,8 @@
 
         <activity
             android:name=".MapaGeneralActivity"
+            android:theme="@style/AppTheme"
+            android:parentActivityName=".HubActivity"
             android:label="@string/title_activity_mapa_general">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

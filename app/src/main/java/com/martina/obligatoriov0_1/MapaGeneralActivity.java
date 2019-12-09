@@ -1,16 +1,26 @@
 package com.martina.obligatoriov0_1;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.database.stDatabase;
 import com.martina.obligatoriov0_1.objetos.SimpleTransportation;
 
@@ -21,6 +31,29 @@ public class MapaGeneralActivity extends FragmentActivity implements OnMapReadyC
     private GoogleMap mMap;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_map_menu, menu);
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.cerrar_sesion_main_map:
+
+                return true;
+            case R.id.preferencias_main_map:
+                //TODO: Implementar preferencias de mapa
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_general);
@@ -28,6 +61,8 @@ public class MapaGeneralActivity extends FragmentActivity implements OnMapReadyC
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
 
     }
 
@@ -47,7 +82,22 @@ public class MapaGeneralActivity extends FragmentActivity implements OnMapReadyC
 
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.setTrafficEnabled(false);
+
+        if(getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT)!=null) {
+            for (int i = 0; i < getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT).length; i++) {
+                LatLng latlng = new LatLng(getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT)[i], getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LONG_ARRAY_EXTRA_INTENT)[i]);
+                mMap.addMarker(new MarkerOptions().position(latlng).title("Soy un marker personalizado").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+            }
+        }
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Toast.makeText(MapaGeneralActivity.this,"Seleccionaste el marker!!",Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
     }
 }

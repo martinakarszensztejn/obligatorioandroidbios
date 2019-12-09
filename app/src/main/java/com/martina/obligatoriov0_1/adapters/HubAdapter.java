@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.martina.obligatoriov0_1.DetalleActivity;
 import com.martina.obligatoriov0_1.MapaGeneralActivity;
 import com.martina.obligatoriov0_1.R;
+import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.database.stDatabase;
 import com.martina.obligatoriov0_1.metodos.MetodosDetalle;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -35,11 +37,13 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
 
     private final LayoutInflater inflater;
     private OnItemSelectedListener onItemSelectedListener;
+    public final Context contexto;
     public HubAdapter(Context context, List<Integer> idListt, List<String> origenListt,  List<String> estadoListt) {
         this.inflater = LayoutInflater.from(context);
         this.estadoList=estadoListt;
         this.origenList=origenListt;
         this.idList = idListt;
+        contexto=context;
     }
     @NonNull
     @Override
@@ -113,7 +117,8 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
                     }
                     int id = idList.get(position);
                     Log.i(Constantes.INFORMACION,"Se clickeo la vista");
-                    MetodosDetalle.getDetailedTransportation(itemView.getContext(),id);
+                    MetodosDetalle.getDetailedTransportation(contexto,id);
+
 
 
                 }
@@ -121,14 +126,18 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
+                    int list_size=HubBroadcastReceiver.simpleTransportationList.size();
+                    double[] origen_lat_array = new double[list_size];
+                    double[] origen_long_array = new double[list_size];
+                    for (int i = 0; i < HubBroadcastReceiver.simpleTransportationList.size(); i++) {
+                       origen_lat_array[i]=HubBroadcastReceiver.simpleTransportationList.get(i).getOrigen_lat();
+                       origen_long_array[i]=(HubBroadcastReceiver.simpleTransportationList.get(i).getOrigen_long());
+                    }
                     Intent intent = new Intent(view.getContext(), MapaGeneralActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT,origen_lat_array);
+                    intent.putExtra(Constantes.ORIGEN_LONG_ARRAY_EXTRA_INTENT,origen_long_array);
 
-
-
-
-
-                    intent.putExtra(Constantes.ID_LIST_EXTRA_INTENT, (Serializable)idList);
                     view.getContext().startActivity(intent);
 
                     return false;

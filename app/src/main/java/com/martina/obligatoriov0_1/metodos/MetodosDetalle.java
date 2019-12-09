@@ -3,6 +3,8 @@ package com.martina.obligatoriov0_1.metodos;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.martina.obligatoriov0_1.HubActivity;
+import com.martina.obligatoriov0_1.NoConnectionDialogError;
 import com.martina.obligatoriov0_1.R;
 import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
@@ -30,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetodosDetalle {
+
     public static void getDetailedTransportation(final Context contexto, int id){
         Log.i(Constantes.INFORMACION,"Se entró a getDetaildedTransportation method");
         RequestQueue queue = Volley.newRequestQueue(contexto);
@@ -53,22 +57,12 @@ public class MetodosDetalle {
                         if(error.toString().equals("com.android.volley.TimeoutError")) {
                             Log.e(Constantes.ERROR_OTHERS,"Timeout obteniendo detalles. :(",error);
                             error.printStackTrace();
-                            final AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
-
-                            builder.setTitle(R.string.salir);
-                            builder.setMessage(R.string.estaSeguroCerrarSesion)
-                                    .setCancelable(true)
-                                    .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                                        }
-                                    });
+                            Intent intent = new Intent(contexto,NoConnectionDialogError.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            contexto.startActivity(intent);
 
 
 
-                            AlertDialog alertDialog = builder.create();
-                            alertDialog.show();
                         }else{
                             Log.e(Constantes.ERROR_JSON,"Error en el detalle. Error no de timeout",error);
                             error.printStackTrace();
@@ -88,8 +82,8 @@ public class MetodosDetalle {
         Transportation pedido = new Transportation();
         try {
             pedido.setDestino_direccion(CompleteTransportation.getString("destino_direccion"));
-            pedido.setDestino_latitud(CompleteTransportation.getInt("destino_latitud"));
-            pedido.setDestino_longitud(CompleteTransportation.getInt("destino_longitud"));
+            pedido.setDestino_latitud(CompleteTransportation.getDouble("destino_latitud"));
+            pedido.setDestino_longitud(CompleteTransportation.getDouble("destino_longitud"));
             pedido.setEstado(CompleteTransportation.getString("estado"));
             if(CompleteTransportation.getString("estado").equals("iniciado")||CompleteTransportation.getString("estado").equals("cargando")||CompleteTransportation.getString("estado").equals("viajando")||CompleteTransportation.getString("estado").equals("viajando")||CompleteTransportation.getString("estado").equals("descargando")||CompleteTransportation.getString("estado").equals("finalizado")){
                 pedido.setVehiculo_chofer(CompleteTransportation.getString("vehiculo_chofer"));
@@ -150,4 +144,7 @@ public class MetodosDetalle {
     }
 
     }
+
+
+
 }

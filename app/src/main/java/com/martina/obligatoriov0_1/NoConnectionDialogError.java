@@ -41,7 +41,7 @@ public class NoConnectionDialogError extends AppCompatActivity {
                 .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Log.e(Constantes.ERROR_JSON, "Error fatal. No se pudo obtener los datos del servidor por lo tanto se cierra la aplicación.");
+                        Log.e(Constantes.ERROR_JSON, "Error fatal. No se pudo obtener los datos del servidor.");
                         Intent intent = new Intent(NoConnectionDialogError.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         NoConnectionDialogError.this.startActivity(intent);
