@@ -6,9 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.martina.obligatoriov0_1.asincrono.AutoRetryHub;
+import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.FullTransportationListBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
@@ -45,9 +44,10 @@ public class HubActivity extends AppCompatActivity implements Serializable {
     public static List<String> listaOrigen = new ArrayList<String>();
 
     public static RecyclerView recyclerView;
-    private HubBroadcastReceiver MBRec = new HubBroadcastReceiver();
-    private RetryHubBroadcastReceiver MBreccc = new RetryHubBroadcastReceiver();
-    private FullTransportationListBroadcastReceiver MBRecc = new FullTransportationListBroadcastReceiver();
+    private HubBroadcastReceiver mBRec = new HubBroadcastReceiver();
+    private ConnectionBroadcastReceiver mConnBRec = new ConnectionBroadcastReceiver();
+    private RetryHubBroadcastReceiver mBreccc = new RetryHubBroadcastReceiver();
+    private FullTransportationListBroadcastReceiver mBRecc = new FullTransportationListBroadcastReceiver();
     public static ProgressBar progressBar_hub;
 
 
@@ -116,11 +116,16 @@ public class HubActivity extends AppCompatActivity implements Serializable {
         }
 
         MetodosHub.getSimpleTransportations(this);
-        LocalBroadcastManager.getInstance(this).registerReceiver(MBRec, new IntentFilter(
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBRec, new IntentFilter(
                 Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST));
-        LocalBroadcastManager.getInstance(this).registerReceiver(MBreccc, new IntentFilter(Constantes.BROADCAST_RETRY_HUB));
-        LocalBroadcastManager.getInstance(this).registerReceiver(MBRecc, new IntentFilter(
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBreccc, new IntentFilter(Constantes.BROADCAST_RETRY_HUB));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mBRecc, new IntentFilter(
                 Constantes.FULL_TRANSPORTATION_WITH_DETAILS));
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+
+
+        registerReceiver(mConnBRec, filter);
         AutoRetryHub task = new AutoRetryHub(this);
         task.execute(progressBar_hub.getVisibility(),null,null);
         Log.i(Constantes.INFORMACION,"ESTADO DE LA PB"+String.valueOf(progressBar_hub.getVisibility()));

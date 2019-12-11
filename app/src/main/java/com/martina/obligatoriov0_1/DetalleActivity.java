@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.objetos.Transportation;
@@ -15,11 +16,17 @@ import com.martina.obligatoriov0_1.objetos.Transportation;
 import java.io.Serializable;
 
 public class DetalleActivity extends AppCompatActivity {
-
+    private ConnectionBroadcastReceiver mConnBRec = new ConnectionBroadcastReceiver();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+
+
+        registerReceiver(mConnBRec, filter);
 
         TextView lbl_detalle_id = findViewById(R.id.lbl_detalle_id);
         TextView lbl_detalle_destino_direccion = findViewById(R.id.lbl_detalle_destino_direccion);

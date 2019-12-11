@@ -129,7 +129,12 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
                     int list_size=HubBroadcastReceiver.simpleTransportationList.size();
                     double[] origen_lat_array = new double[list_size];
                     double[] origen_long_array = new double[list_size];
+                    int[] id_array = new int[list_size];
+                    String[] estado_array = new String[list_size];
                     for (int i = 0; i < HubBroadcastReceiver.simpleTransportationList.size(); i++) {
+                       id_array[i]=HubBroadcastReceiver.simpleTransportationList.get(i).getId();
+                       estado_array[i]=HubBroadcastReceiver.simpleTransportationList.get(i).getEstado();
+
                        origen_lat_array[i]=HubBroadcastReceiver.simpleTransportationList.get(i).getOrigen_lat();
                        origen_long_array[i]=(HubBroadcastReceiver.simpleTransportationList.get(i).getOrigen_long());
                     }
@@ -137,6 +142,9 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT,origen_lat_array);
                     intent.putExtra(Constantes.ORIGEN_LONG_ARRAY_EXTRA_INTENT,origen_long_array);
+                    intent.putExtra(Constantes.ID_ARRAY_EXTRA_INTENT,id_array);
+                    intent.putExtra(Constantes.ESTADO_ARRAY_EXTRA_INTENT,estado_array);
+
 
                     view.getContext().startActivity(intent);
 

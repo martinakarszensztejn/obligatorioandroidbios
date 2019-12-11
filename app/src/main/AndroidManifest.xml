@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,7 +51,17 @@
         <activity
             android:name=".HubActivity"
             android:label="@string/title_activity_hub"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+        </activity>
+
+        <receiver android:name=".broadcastReceivers.ConnectionBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE " />
+
+            </intent-filter>
+        </receiver>
         <activity
             android:name=".RegistroActivity"
             android:parentActivityName=".MainActivity" />
@@ -65,6 +76,7 @@
             android:name=".LoginActivity"
             android:parentActivityName=".RegistroActivity" />
         <activity android:name=".NoConnectionDialogError" />
+
 
         <meta-data
             android:name="preloaded_fonts"

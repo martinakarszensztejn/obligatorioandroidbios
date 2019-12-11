@@ -3,6 +3,7 @@ package com.martina.obligatoriov0_1;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,8 +21,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.database.stDatabase;
+import com.martina.obligatoriov0_1.metodos.MetodosDetalle;
 import com.martina.obligatoriov0_1.objetos.SimpleTransportation;
 
 import java.util.List;
@@ -29,6 +32,7 @@ import java.util.List;
 public class MapaGeneralActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private ConnectionBroadcastReceiver mConnBRec = new ConnectionBroadcastReceiver();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,6 +61,11 @@ public class MapaGeneralActivity extends FragmentActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa_general);
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+
+
+        registerReceiver(mConnBRec, filter);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -86,18 +95,25 @@ public class MapaGeneralActivity extends FragmentActivity implements OnMapReadyC
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         mMap.setTrafficEnabled(false);
 
+
         if(getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT)!=null) {
-            for (int i = 0; i < getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT).length; i++) {
+            for (int i = 0; i < getIntent().getIntArrayExtra(Constantes.ID_ARRAY_EXTRA_INTENT).length; i++) {
                 LatLng latlng = new LatLng(getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT)[i], getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LONG_ARRAY_EXTRA_INTENT)[i]);
-                mMap.addMarker(new MarkerOptions().position(latlng).title("Soy un marker personalizado").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+                final int actual_ID = getIntent().getIntArrayExtra(Constantes.ID_ARRAY_EXTRA_INTENT)[i];
+                String strActual_ID = String.valueOf(actual_ID);
+                mMap.addMarker(new MarkerOptions().position(latlng).title(strActual_ID).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))).setTag("marker"+strActual_ID);
+
+                       mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        int selected_ID = Integer.parseInt(marker.getTitle());
+                        MetodosDetalle.getDetailedTransportation(MapaGeneralActivity.this,selected_ID);
+
+                        return false;
+                    }
+                });
             }
         }
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Toast.makeText(MapaGeneralActivity.this,"Seleccionaste el marker!!",Toast.LENGTH_LONG).show();
-                return false;
-            }
-        });
+
     }
 }

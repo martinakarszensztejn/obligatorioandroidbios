@@ -43,6 +43,9 @@ public class Constantes {
     public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_ROBS = "com.martina.obligatoriov0_1.RECEPCION_OBSERVACIONES";
     public static final String ORIGEN_LAT_ARRAY_EXTRA_INTENT = "com.martina.obligatoriov0_1.ORIGEN_LAT_ARRAY_EXTRA_INTENT";
     public static final String ORIGEN_LONG_ARRAY_EXTRA_INTENT = "com.martina.obligatoriov0_1.ORIGEN_LONG_ARRAY_EXTRA_INTENT";
+    public static final String ID_ARRAY_EXTRA_INTENT = "com.martina.obligatoriov0_1.ID_ARRAY_EXTRA_INTENT";
+    public static final String ESTADO_ARRAY_EXTRA_INTENT = "com.martina.obligatoriov0_1.ESTADO_ARRAY_EXTRA_INTENT";
+    public static final String CONEXION = "com.martina.obligatoriov0_1.conexion";
 
     public static int CURRENT_DATABASE_VERSION = 1;
     public static String DATABASE_NAME = "mydb";
