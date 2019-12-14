@@ -60,6 +60,7 @@ public class DetalleActivity extends AppCompatActivity {
                 Intent intent = new Intent(DetalleActivity.this,Transportation_status_update_activity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(Constantes.TRANSPORTATION_UPDATE_CURRENT_STATUS,getIntent().getStringExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_STATUS));
+                intent.putExtra(Constantes.TRANSPORTATION_UPDATE_CURRENT_ID,getIntent().getIntExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_ID,0));
                 startActivity(intent);
             }
         });

@@ -41,4 +41,16 @@
     <string name="estado_actual">Current Status:</string>
     <string name="boton_update">Update status to:</string>
 
+    <string name="pedido_finalizado">Transportation Finalized</string>
+    <string name="errorDeClienteEnUpdate">There\'s been a client error in the solicitud. Please check the input data and retry</string>
+    <string name="exitocambiandodeestado">The status has been changed successfully.</string>
+    <string name="vehiculo_marca">Enter vehicle brand</string>
+    <string name="vehiculo_modelo">Enter vehicle model</string>
+    <string name="vehiculo_matricula">Enter vehicle plate number</string>
+    <string name="vehiculo_chofer">Enter driver\'s full name</string>
+    <string name="campovacio">This field cannot be left empty</string>
+    <string name="fecha_de_recepcion">Enter date of reception</string>
+    <string name="ingrese_observaciones">Enter observations</string>
+    <string name="ingrese_nombre_del_receptor">Enter receiver\'s name</string>
+
 </resources>
