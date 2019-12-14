@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.martina.obligatoriov0_1">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -15,7 +14,6 @@
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,7 +21,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".Transportation_status_update_activity"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -38,9 +36,9 @@
 
         <activity
             android:name=".MapaGeneralActivity"
-            android:theme="@style/AppTheme"
+            android:label="@string/title_activity_mapa_general"
             android:parentActivityName=".HubActivity"
-            android:label="@string/title_activity_mapa_general">
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.martina.obligatoriov0_1.HubActivity" />
@@ -51,17 +49,14 @@
         <activity
             android:name=".HubActivity"
             android:label="@string/title_activity_hub"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-
-        </activity>
-
-        <receiver android:name=".broadcastReceivers.ConnectionBroadcastReceiver" >
+        <receiver android:name=".broadcastReceivers.ConnectionBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE " />
-
             </intent-filter>
         </receiver>
+
         <activity
             android:name=".RegistroActivity"
             android:parentActivityName=".MainActivity" />
@@ -76,7 +71,6 @@
             android:name=".LoginActivity"
             android:parentActivityName=".RegistroActivity" />
         <activity android:name=".NoConnectionDialogError" />
-
 
         <meta-data
             android:name="preloaded_fonts"

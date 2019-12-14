@@ -1,11 +1,16 @@
 package com.martina.obligatoriov0_1;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.martina.obligatoriov0_1.asincrono.AutoRetryHub;
 import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
@@ -13,7 +18,9 @@ import com.martina.obligatoriov0_1.broadcastReceivers.FullTransportationListBroa
 import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.RetryHubBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
+import com.martina.obligatoriov0_1.database.stDatabase;
 import com.martina.obligatoriov0_1.metodos.MetodosHub;
+import com.martina.obligatoriov0_1.objetos.SimpleTransportation;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +39,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class HubActivity extends AppCompatActivity implements Serializable {
     private static final float MIN_DISTANCE = 150;
     public static TextView lbl_RV_id_lbl;
@@ -49,6 +58,8 @@ public class HubActivity extends AppCompatActivity implements Serializable {
     private RetryHubBroadcastReceiver mBreccc = new RetryHubBroadcastReceiver();
     private FullTransportationListBroadcastReceiver mBRecc = new FullTransportationListBroadcastReceiver();
     public static ProgressBar progressBar_hub;
+    
+    
 
 
 
@@ -101,6 +112,11 @@ public class HubActivity extends AppCompatActivity implements Serializable {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constantes.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
+        String email_user_logeado = sharedPreferences.getString(Constantes.EMAIL_SESION_INICIADA, null);
+
+        MetodosHub.isConnectionAvailableII(this);
+        boolean isConnectionAvailable = sharedPreferences.getBoolean(Constantes.CONEXION, true);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         recyclerView = findViewById(R.id.recyclerView);
@@ -114,8 +130,9 @@ public class HubActivity extends AppCompatActivity implements Serializable {
             progressBar_hub.setIndeterminate(true);
             recyclerView.setVisibility(View.INVISIBLE);
         }
-
-        MetodosHub.getSimpleTransportations(this);
+        DetalleBroadcastReceiver mybr = new DetalleBroadcastReceiver();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mybr, new IntentFilter(
+                Constantes.FILTRO_INTENT_TRANSPORTATION_DETALLADA));
         LocalBroadcastManager.getInstance(this).registerReceiver(mBRec, new IntentFilter(
                 Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST));
         LocalBroadcastManager.getInstance(this).registerReceiver(mBreccc, new IntentFilter(Constantes.BROADCAST_RETRY_HUB));
@@ -126,26 +143,28 @@ public class HubActivity extends AppCompatActivity implements Serializable {
 
 
         registerReceiver(mConnBRec, filter);
+
+
+        if(isConnectionAvailable){
+            
+        
+        MetodosHub.getSimpleTransportations(this);
+
         AutoRetryHub task = new AutoRetryHub(this);
         task.execute(progressBar_hub.getVisibility(),null,null);
         Log.i(Constantes.INFORMACION,"ESTADO DE LA PB"+String.valueOf(progressBar_hub.getVisibility()));
 
-        DetalleBroadcastReceiver mybr = new DetalleBroadcastReceiver();
-        LocalBroadcastManager.getInstance(this).registerReceiver(mybr, new IntentFilter(
-                Constantes.FILTRO_INTENT_TRANSPORTATION_DETALLADA));
 
+       
 
-        if (getIntent().getStringExtra(Constantes.EMAIL_EXTRA_INTENT) != null) {
-            String email = getIntent().getStringExtra(Constantes.EMAIL_EXTRA_INTENT);
+        }else {
+
+            MetodosHub.noConnectionError(this);
+
+            MetodosHub.getLocalSimpleTransportations(this);
+
 
         }
-        SharedPreferences sharedPreferences = getSharedPreferences(Constantes.SHARED_PREFERENCES_NAME, MODE_PRIVATE);
-        String email_user_logeado = sharedPreferences.getString(Constantes.EMAIL_SESION_INICIADA, null);
-
-
-
-
-
     }
 
 

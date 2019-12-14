@@ -46,6 +46,13 @@ public class Constantes {
     public static final String ID_ARRAY_EXTRA_INTENT = "com.martina.obligatoriov0_1.ID_ARRAY_EXTRA_INTENT";
     public static final String ESTADO_ARRAY_EXTRA_INTENT = "com.martina.obligatoriov0_1.ESTADO_ARRAY_EXTRA_INTENT";
     public static final String CONEXION = "com.martina.obligatoriov0_1.conexion";
+    public static final String TRANSPORTATION_UPDATE_CURRENT_STATUS = "com.martina.obligatoriov0_1.TRANSPORTATION_UPDATE_CURRENT_STATUS";
+    public static final String ESTADO_1 = "pendiente";
+    public static final String ESTADO_2 = "iniciado";
+    public static final String ESTADO_3 = "cargando";
+    public static final String ESTADO_4 = "viajando";
+    public static final String ESTADO_5 = "descargando";
+    public static final String ESTADO_6 = "finalizado";
 
     public static int CURRENT_DATABASE_VERSION = 1;
     public static String DATABASE_NAME = "mydb";

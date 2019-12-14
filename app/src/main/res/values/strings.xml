@@ -35,4 +35,9 @@
     <string name="errorFatalDeConexion">Ha ocurrido un error fatal obteniendo los datos del servidor. Por favor revise su conexión y reinténtelo</string>
     <string name="title_activity_mapa_general">Mapa General</string>
     <string name="reminder">Presione el pedido para ver sus detalles y trabajar con él, mantenga presionada la lista para ver el mapa de pedidos.</string>
+    <string name="nohayconexion">Su dispositivo no posee conexión a internet. Se procederá a usar datos locales si es posible.</string>
+    <string name="estado_actual">Estado actual:</string>
+    <string name="boton_update">Cambiar a estado:</string>
+    <string name="pedido_finalizado">Pedido Finalizado</string>
+
 </resources>

@@ -1,11 +1,13 @@
 package com.martina.obligatoriov0_1.metodos;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -18,9 +20,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.martina.obligatoriov0_1.HubActivity;
 import com.martina.obligatoriov0_1.MainActivity;
+import com.martina.obligatoriov0_1.R;
 import com.martina.obligatoriov0_1.adapters.HubAdapter;
+import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
+import com.martina.obligatoriov0_1.database.stDatabase;
 import com.martina.obligatoriov0_1.objetos.SimpleTransportation;
 import com.martina.obligatoriov0_1.objetos.Transportation;
 
@@ -158,7 +163,7 @@ public class MetodosHub implements Serializable {
     }
 
     private static void manejarRespuesta(JSONArray response, Context contexto) {
-        List<SimpleTransportation> transportationList = new ArrayList<>();
+        List<SimpleTransportation> simpTransportationList = new ArrayList<>();
         for (int i = 0; i < response.length(); i++) {
             try {
                 if (response == null) {
@@ -176,7 +181,7 @@ public class MetodosHub implements Serializable {
 
 
 
-                transportationList.add(simpleTransportation);
+                simpTransportationList.add(simpleTransportation);
 
             } catch (JSONException e) {
                 Log.e(Constantes.ERROR_JSON, "Error en el list transportations #1", e);
@@ -186,8 +191,8 @@ public class MetodosHub implements Serializable {
         }
         Intent intentBroadcast = new Intent(Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST);
         intentBroadcast.setAction(Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST);
-        if (transportationList.size() > 0) {
-            intentBroadcast.putExtra(Constantes.EXTRA_INTENT_SIMPLE_TRANSPORTATION_LIST, (Serializable) transportationList);
+        if (simpTransportationList.size() > 0) {
+            intentBroadcast.putExtra(Constantes.EXTRA_INTENT_SIMPLE_TRANSPORTATION_LIST, (Serializable) simpTransportationList);
         } else {
             Log.i(Constantes.INFORMACION, "LISTA VACIA!!!");
         }
@@ -238,5 +243,53 @@ public class MetodosHub implements Serializable {
     }
 
 
+    public static void noConnectionError(Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
+        builder.setTitle(R.string.error);
+        builder.setMessage(R.string.nohayconexion)
+                .setCancelable(true)
+                .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Log.e(Constantes.ERROR_OTHERS, "No hay conexión, se procede a usar los datos locales.");
+                    }
+                });
+
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    public static void getLocalSimpleTransportations(HubActivity contexto) {
+        stDatabase database = new stDatabase(contexto);
+        List<SimpleTransportation> list = database.getstList();
+        int as = list.size();
+        list.get(0).getId();
+
+
+        Intent intentBroadcast = new Intent(Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST);
+        intentBroadcast.setAction(Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST);
+        if (list.size() > 0) {
+            intentBroadcast.putExtra(Constantes.EXTRA_INTENT_SIMPLE_TRANSPORTATION_LIST, (Serializable) list);
+        } else {
+            Log.i(Constantes.INFORMACION, "LISTA DATABASE VACIA!!!");
+        }
+        intentBroadcast.setFlags(FLAG_ACTIVITY_NEW_TASK);
+        LocalBroadcastManager.getInstance(contexto).sendBroadcast(intentBroadcast);
+
+        if (contexto.getIntent().getStringExtra(Constantes.EMAIL_EXTRA_INTENT) != null) {
+        String email = contexto.getIntent().getStringExtra(Constantes.EMAIL_EXTRA_INTENT);
+
+    }
+
+    }
+
+    public static void isConnectionAvailableII(Context contexto) {
+        if(ConnectionBroadcastReceiver.isNetworkAvailable(contexto)){
+            SharedPreferences.Editor editor = contexto.getSharedPreferences(Constantes.SHARED_PREFERENCES_NAME, contexto.MODE_PRIVATE).edit();
+            editor.putBoolean(Constantes.CONEXION,true);
+
+        }
+    }
 }

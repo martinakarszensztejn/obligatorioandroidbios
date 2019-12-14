@@ -2,6 +2,8 @@ package com.martina.obligatoriov0_1.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.martina.obligatoriov0_1.DetalleActivity;
 import com.martina.obligatoriov0_1.MapaGeneralActivity;
 import com.martina.obligatoriov0_1.R;
+import com.martina.obligatoriov0_1.asincrono.DatabaseSetter;
 import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.database.stDatabase;
 import com.martina.obligatoriov0_1.metodos.MetodosDetalle;
+import com.martina.obligatoriov0_1.objetos.AuxiliarDatabaseBundle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -86,7 +90,7 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
 
         }
 
-        void bind(final int position, itemViewHolder holder) {
+        void bind(final int position, final itemViewHolder holder) {
 
              final int current_id = idList.get(position);
              String current_estado = estadoList.get(position);
@@ -100,11 +104,13 @@ public class HubAdapter extends RecyclerView.Adapter<HubAdapter.itemViewHolder> 
 
 
             if(idList.size()>1){
-                stDatabase asd = new stDatabase(holder.itemView.getContext());
-                for (int i = 0; i < idList.size(); i++) {
-                    asd.setst(idList.get(i), estadoList.get(i), origenList.get(i));
-//                    asd.updatest(idList.get(i),estadoList.get(i),origenList.get(i));
-                }
+
+
+//                for (int i = 0; i < idList.size(); i++) {
+//
+//                    db.setst(idList.get(i), estadoList.get(i), origenList.get(i));
+//
+//                }
 
             }
 

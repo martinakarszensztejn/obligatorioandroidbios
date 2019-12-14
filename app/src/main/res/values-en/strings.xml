@@ -37,5 +37,8 @@
     <string name="destino">DESTINATION:</string>
     <string name="title_activity_mapa_general">General Map</string>
     <string name="reminder">Simple Press any transportation to see its details and work with it, or longpress the list to view the map with all the transportations</string>
+    <string name="nohayconexion">Your decive is not connected to the internet. Local data will be used if possible.</string>
+    <string name="estado_actual">Current Status:</string>
+    <string name="boton_update">Update status to:</string>
 
 </resources>

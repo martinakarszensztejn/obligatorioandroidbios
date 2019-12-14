@@ -34,7 +34,7 @@ public class ConnectionBroadcastReceiver extends BroadcastReceiver {
 
 
     }
-    private boolean isNetworkAvailable(Context contexto) {
+    public static boolean isNetworkAvailable(Context contexto) {
         ConnectivityManager connectivityManager = (ConnectivityManager) contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();

@@ -3,11 +3,13 @@ package com.martina.obligatoriov0_1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
@@ -50,5 +52,16 @@ public class DetalleActivity extends AppCompatActivity {
         lbl_detalle_origen_direccion.setText(getIntent().getStringExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_OD));
         lbl_detalle_origen_lat.setText(String.valueOf(getIntent().getDoubleExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_OLAT,0)));
         lbl_detalle_origen_long.setText(String.valueOf(getIntent().getDoubleExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_OLONG,0)));
+
+        FloatingActionButton fab = findViewById(R.id.detalle_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetalleActivity.this,Transportation_status_update_activity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra(Constantes.TRANSPORTATION_UPDATE_CURRENT_STATUS,getIntent().getStringExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_STATUS));
+                startActivity(intent);
+            }
+        });
     }
 }

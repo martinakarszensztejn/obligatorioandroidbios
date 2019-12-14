@@ -46,7 +46,9 @@ public class stDatabase {
         Cursor cursor = db.rawQuery("SELECT * FROM st;", null);
 
         if (cursor.moveToFirst()) {
+
             do {
+
                 int id = cursor.getInt(0);
                 String origen = cursor.getString(1);
                 String estado = cursor.getString(2);
@@ -73,20 +75,12 @@ public class stDatabase {
         db.close();
         dh.close();
     }
-//    public void updatest(int id_new, String estado_new, String origen_new){
-//        DatabaseHelper dh = new DatabaseHelper(contexto);
-//        SQLiteDatabase db = dh.getWritableDatabase();
-//        ContentValues values = new ContentValues();
-//        values.put("id_new",id_new);
-//        values.put("origen_new", origen_new);
-//        values.put("estado_new",estado_new);
-//        String[] argu = new String[1];
-//        argu[0]=String.valueOf(id_new);
-//        db.update("st",values,"ID = ?",argu);
-//        db.close();
-//        dh.close();
-//
-//    }
+    public void deleteAllSt(){
+        DatabaseHelper dh = new DatabaseHelper(contexto);
+        SQLiteDatabase db = dh.getWritableDatabase();
+        db.delete("st",null,null);
+    }
+
 
 
 
