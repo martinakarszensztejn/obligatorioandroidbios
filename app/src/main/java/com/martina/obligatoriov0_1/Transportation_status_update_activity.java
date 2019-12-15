@@ -1,9 +1,25 @@
 package com.martina.obligatoriov0_1;
 
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+
+import android.Manifest;
+import android.app.ActivityManager;
+import android.app.AlarmManager;
+
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationProvider;
 import android.os.Bundle;
-import android.text.Editable;
+
+
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,14 +29,19 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.metodos.MetodosUpdate;
+import com.martina.obligatoriov0_1.servicios.ClientLocationService;
 
-import org.json.JSONException;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Transportation_status_update_activity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +86,33 @@ public class Transportation_status_update_activity extends AppCompatActivity {
 
             }else if(current_Status.equals(Constantes.ESTADO_2)){
 
+                final Context contexto = Transportation_status_update_activity.this;
+
+
+
+                Intent intent = new Intent(contexto,ClientLocationService.class);
+                intent.putExtra(Constantes.INTENT_LOCATION_ID_TRANSPORTATION,id);
+                startService(intent);
+
+
+
+
                 button.setText(getResources().getString(R.string.boton_update)+" "+Constantes.ESTADO_3);
+
+
             }else if(current_Status.equals(Constantes.ESTADO_3)){
+                Intent intent = new Intent(this, ClientLocationService.class);
+                stopService(intent);
                 button.setText(getResources().getString(R.string.boton_update)+" "+Constantes.ESTADO_4);
             }else if(current_Status.equals(Constantes.ESTADO_4)){
+                final Context contexto = Transportation_status_update_activity.this;
+                Intent intent = new Intent(contexto,ClientLocationService.class);
+                intent.putExtra(Constantes.INTENT_LOCATION_ID_TRANSPORTATION,id);
+                startService(intent);
                 button.setText(getResources().getString(R.string.boton_update)+" "+Constantes.ESTADO_5);
             }else if(current_Status.equals(Constantes.ESTADO_5)){
+                Intent intent = new Intent(this, ClientLocationService.class);
+
                 layout_recepcion_fecha.setVisibility(View.VISIBLE);
                 layout_recepcion_nombre_receptor.setVisibility(View.VISIBLE);
                 layout_recepcion_observaciones.setVisibility(View.VISIBLE);
@@ -95,7 +137,11 @@ public class Transportation_status_update_activity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(isMyServiceRunning(ClientLocationService.class)){
+                    Intent intent = new Intent(Transportation_status_update_activity.this,ClientLocationService.class);
+                    stopService(intent);
+                    ClientLocationService.timer.cancel();
+                }
                 List<String> datos_extra = new ArrayList<>();
                 if (current_Status != null) {
                     if(current_Status.equals(Constantes.ESTADO_1)){
@@ -197,11 +243,17 @@ public class Transportation_status_update_activity extends AppCompatActivity {
 
             }
         });
+
     }
 
-
-
-
-
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 

@@ -1,11 +1,15 @@
 package com.martina.obligatoriov0_1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,6 +18,7 @@ import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceive
 import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.objetos.Transportation;
+import com.martina.obligatoriov0_1.servicios.ClientLocationService;
 
 import java.io.Serializable;
 
@@ -57,11 +62,25 @@ public class DetalleActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DetalleActivity.this,Transportation_status_update_activity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra(Constantes.TRANSPORTATION_UPDATE_CURRENT_STATUS,getIntent().getStringExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_STATUS));
-                intent.putExtra(Constantes.TRANSPORTATION_UPDATE_CURRENT_ID,getIntent().getIntExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_ID,0));
-                startActivity(intent);
+                if (ActivityCompat.checkSelfPermission(DetalleActivity.this,
+                        Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED) {
+
+                    ActivityCompat.requestPermissions(DetalleActivity.this,
+                            new String[]{
+                                    Manifest.permission.ACCESS_FINE_LOCATION
+                            },
+                            99
+                    );
+                } else {
+                    Log.d(Constantes.INFORMACION, "getLocation: permissions granted");
+                    Intent intent = new Intent(DetalleActivity.this,Transportation_status_update_activity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra(Constantes.TRANSPORTATION_UPDATE_CURRENT_STATUS,getIntent().getStringExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_STATUS));
+                    intent.putExtra(Constantes.TRANSPORTATION_UPDATE_CURRENT_ID,getIntent().getIntExtra(Constantes.TRANSPORTATION_DETALLADA_EXTRA_INTENT_ID,0));
+                    startActivity(intent);
+                }
+
             }
         });
     }

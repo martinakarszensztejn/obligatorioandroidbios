@@ -167,5 +167,4 @@ public class HubActivity extends AppCompatActivity implements Serializable {
         }
     }
 
-
 }

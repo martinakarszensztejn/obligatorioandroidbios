@@ -55,6 +55,8 @@ public class Constantes {
     public static final String ESTADO_5 = "descargando";
     public static final String ESTADO_6 = "finalizado";
     public static final String URL_UPDATE = "https://bios-fletes-api.herokuapp.com/api/student/53729203/transportations/";
+    public static final String URL_LOCATION = "https://bios-fletes-api.herokuapp.com/api/student/53729203/transportations/";
+    public static final String INTENT_LOCATION_ID_TRANSPORTATION = "com.martina.obligatoriov0_1.INTENT_LOCATION_ID_TRANSPORTATION";
 
 
     public static int CURRENT_DATABASE_VERSION = 1;
