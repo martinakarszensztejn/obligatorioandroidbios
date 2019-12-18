@@ -7,8 +7,6 @@
         android:orderInCategory="30"
         app:showAsAction="always"
         android:title="@string/aceptar"/>
-    <item android:id="@+id/menu_preferencias"
-        android:title="Preferencias"/>
     <item android:id="@+id/menu_cerrar_sesion"
         android:title="@string/cerrarsesion"/>
 

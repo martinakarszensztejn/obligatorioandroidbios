@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99AF94DF">
+    android:background="@color/colorBackground">
 
     <TextView
         android:id="@+id/lblEmail"
@@ -28,6 +28,8 @@
         android:text="@string/iniciar_sesion_caps"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblEmail"></Button>
+
+
 
     <Button
         android:id="@+id/registrarse"

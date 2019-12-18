@@ -22,10 +22,12 @@ import com.martina.obligatoriov0_1.HubActivity;
 import com.martina.obligatoriov0_1.MainActivity;
 import com.martina.obligatoriov0_1.R;
 import com.martina.obligatoriov0_1.adapters.HubAdapter;
+import com.martina.obligatoriov0_1.asincrono.DatabaseSetter;
 import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
 import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
 import com.martina.obligatoriov0_1.database.stDatabase;
+import com.martina.obligatoriov0_1.objetos.AuxiliarDatabaseBundle;
 import com.martina.obligatoriov0_1.objetos.SimpleTransportation;
 import com.martina.obligatoriov0_1.objetos.Transportation;
 
@@ -164,6 +166,9 @@ public class MetodosHub implements Serializable {
 
     private static void manejarRespuesta(JSONArray response, Context contexto) {
         List<SimpleTransportation> simpTransportationList = new ArrayList<>();
+        List<Integer> idList = new ArrayList<>();
+        List<String> estadoList = new ArrayList<>();
+        List<String> origenList = new ArrayList<>();
         for (int i = 0; i < response.length(); i++) {
             try {
                 if (response == null) {
@@ -178,6 +183,10 @@ public class MetodosHub implements Serializable {
                 simpleTransportation.setOrigen(transportation.getString("origen_direccion"));
                 simpleTransportation.setOrigen_lat(transportation.getDouble("origen_latitud"));
                 simpleTransportation.setOrigen_long(transportation.getDouble("origen_longitud"));
+                idList.add(transportation.getInt("id"));
+                estadoList.add(transportation.getString("estado"));
+                origenList.add(transportation.getString("origen_direccion"));
+
 
 
 
@@ -189,6 +198,21 @@ public class MetodosHub implements Serializable {
 
 
         }
+        stDatabase db = new stDatabase(contexto);
+
+        if(idList.size()>=1){
+            db.deleteAllSt();
+            AuxiliarDatabaseBundle bundle= new AuxiliarDatabaseBundle();
+            bundle.setDb(db);
+            bundle.setEstadoList(estadoList);
+            bundle.setIdList(idList);
+            bundle.setOrigenList(origenList);
+            new DatabaseSetter(contexto).execute(bundle);
+        }
+
+
+
+
         Intent intentBroadcast = new Intent(Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST);
         intentBroadcast.setAction(Constantes.FILTRO_INTENT_SIMPLE_TRANSPORTATION_LIST_BROADCAST);
         if (simpTransportationList.size() > 0) {

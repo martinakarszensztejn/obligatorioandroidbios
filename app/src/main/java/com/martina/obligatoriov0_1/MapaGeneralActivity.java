@@ -15,10 +15,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.martina.obligatoriov0_1.broadcastReceivers.ConnectionBroadcastReceiver;
@@ -73,35 +76,32 @@ public class MapaGeneralActivity extends FragmentActivity implements OnMapReadyC
 
 
 
+
     }
 
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        LatLng bios = new LatLng(-34.905551, -56.18888);
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(bios));
         mMap.setTrafficEnabled(false);
+        UiSettings uiSettings = mMap.getUiSettings();
+        uiSettings.setCompassEnabled(true);
+        uiSettings.setZoomControlsEnabled(true);
+        uiSettings.setMapToolbarEnabled(true);
+        uiSettings.setAllGesturesEnabled(true);
 
-
+        MapStyleOptions mapStyleOptions = MapStyleOptions.loadRawResourceStyle(this,R.raw.map);
+        mMap.setMapStyle(mapStyleOptions);
         if(getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT)!=null) {
             for (int i = 0; i < getIntent().getIntArrayExtra(Constantes.ID_ARRAY_EXTRA_INTENT).length; i++) {
                 LatLng latlng = new LatLng(getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LAT_ARRAY_EXTRA_INTENT)[i], getIntent().getDoubleArrayExtra(Constantes.ORIGEN_LONG_ARRAY_EXTRA_INTENT)[i]);
                 final int actual_ID = getIntent().getIntArrayExtra(Constantes.ID_ARRAY_EXTRA_INTENT)[i];
                 String strActual_ID = String.valueOf(actual_ID);
-                mMap.addMarker(new MarkerOptions().position(latlng).title(strActual_ID).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))).setTag("marker"+strActual_ID);
+                mMap.addMarker(new MarkerOptions().position(latlng).title(strActual_ID).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA))).setTag("marker"+strActual_ID);
 
                        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
                     @Override

@@ -1,5 +1,7 @@
 package com.martina.obligatoriov0_1.constantes;
 
+import android.app.PendingIntent;
+
 public class Constantes {
     public static final String URL_REGISTRO = "https://bios-fletes-api.herokuapp.com/api/student/53729203/users/register";
     public static final String URL_LOGIN = "https://bios-fletes-api.herokuapp.com/api/student/53729203/users/login";
@@ -57,6 +59,27 @@ public class Constantes {
     public static final String URL_UPDATE = "https://bios-fletes-api.herokuapp.com/api/student/53729203/transportations/";
     public static final String URL_LOCATION = "https://bios-fletes-api.herokuapp.com/api/student/53729203/transportations/";
     public static final String INTENT_LOCATION_ID_TRANSPORTATION = "com.martina.obligatoriov0_1.INTENT_LOCATION_ID_TRANSPORTATION";
+    public static final String TRANSPORTATION_DETALLADA_EXTRA_INTENT_ID_NEW = "com.martina.obligatoriov0_1.id_new";;
+    public static final String JSON_BODY = "com.martina.obligatoriov0_1.JSON_BODY";
+    public static final String JSON_BODY_EXTRA = "com.martina.obligatoriov0_1.JSON_BODY_EXTRA";
+    public static final String FILTRO_INTENT_LOCATION = "FILTRO INTENT LOCATION com.martina.obligatorio";
+    public static final String DETALLE_LONG_DESTINO = "com.martina.obligatoriov0_1.DETALLE_LONG_DESTINO";
+    public static final String DETALLE_LONG_ORIGEN = "com.martina.obligatoriov0_1.DETALLE_LONG_ORIGEN";
+    public static final String DETALLE_LAT_DESTINO = "com.martina.obligatoriov0_1.DETALLE_LAT_DESTINO";
+    public static final String DETALLE_LAT_ORIGEN = "com.martina.obligatoriov0_1.DETALLE_LAT_ORIGEN";
+    public static final String DETALLE_MAPA_ID_EXTRA = "com.martina.obligatoriov0_1.DETALLE_MAPA_ID_EXTRA";
+    public static final String BUNDLE_EXTRA_LOCATION_INTENT = "BUNDLE_EXTRA_LOCATION_INTENT";
+    public static final String JSON_BODY_EXTRA_EXTRA = "EXTRA JSON BODY EXTRA INTENT";
+    public static final String DETALLE_MAPA_OLAT = "com.martina.obligatoriov0_1.OLAT";
+    public static final String DETALLE_MAPA_OLONG = "com.martina.obligatoriov0_1.OLONG";
+    public static final String DETALLE_MAPA_DLAT = "com.martina.obligatoriov0_1.DLAT";
+    public static final String DETALLE_MAPA_DLONG = "com.martina.obligatoriov0_1.DLONG";
+    public static final String CANAL = "Pedidos";
+    public static final int NOTIFICATION_ID = 1891;
+    public static final String TAG_ALARMA = "TAG ALARMA DETALLE";
+    public static final String INICIO_BROADCAST_ALARMA ="com.martina.obligatoriov0_1.ALARMA";
+    public static final int RQ = 117741;
+    public static final String  NOTIFICATION_ID_PEDIDO = "com.martina.obligatoriov0_1.not_id_pedido";
 
 
     public static int CURRENT_DATABASE_VERSION = 1;

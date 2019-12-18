@@ -1,13 +1,17 @@
 package com.martina.obligatoriov0_1.metodos;
 
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 
-import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.volley.Request;
@@ -19,18 +23,18 @@ import com.android.volley.toolbox.Volley;
 import com.martina.obligatoriov0_1.HubActivity;
 import com.martina.obligatoriov0_1.NoConnectionDialogError;
 import com.martina.obligatoriov0_1.R;
-import com.martina.obligatoriov0_1.broadcastReceivers.DetalleBroadcastReceiver;
-import com.martina.obligatoriov0_1.broadcastReceivers.HubBroadcastReceiver;
+import com.martina.obligatoriov0_1.broadcastReceivers.NotificationBroadcastReceiver;
 import com.martina.obligatoriov0_1.constantes.Constantes;
-import com.martina.obligatoriov0_1.objetos.SimpleTransportation;
 import com.martina.obligatoriov0_1.objetos.Transportation;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class MetodosDetalle {
 
@@ -92,7 +96,11 @@ public class MetodosDetalle {
                 pedido.setVehiculo_matricula(CompleteTransportation.getString("vehiculo_matricula"));
             }
             pedido.setFecha(CompleteTransportation.getString("fecha"));
-            pedido.setId(CompleteTransportation.getInt("id"));
+            String fecha = CompleteTransportation.getString("fecha");
+            Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss",Locale.ENGLISH).parse(fecha);
+            int id_pedido=CompleteTransportation.getInt("id");
+            MetodosDetalle.crearNotificacion(contexto,date,id_pedido);
+            pedido.setId(id_pedido);
             pedido.setOrigen_direccion(CompleteTransportation.getString("origen_direccion"));
             pedido.setOrigen_latitud(CompleteTransportation.getDouble("origen_latitud"));
             pedido.setOrigen_longitud(CompleteTransportation.getDouble("origen_longitud"));
@@ -141,7 +149,38 @@ public class MetodosDetalle {
     } catch (JSONException e) {
         Log.e(Constantes.ERROR_JSON, "Error en la lista detallada del Transportation, en el metodo manejo respuesta asignando valor a mi objeto json",e);
         e.printStackTrace();
+    } catch (ParseException e) {
+            Log.e(Constantes.ERROR_JSON, "Error en el parse de fecha",e);
+            e.printStackTrace();
+
+        }
+
     }
+
+    private static void crearNotificacion(Context contexto, Date date,int id_pedido) {
+
+
+
+        AlarmManager alarmManager = (AlarmManager)contexto.getSystemService(Context.ALARM_SERVICE);
+        long time = date.getTime();
+
+        Intent intent1 = new Intent(Constantes.INICIO_BROADCAST_ALARMA);
+        intent1.putExtra(Constantes.NOTIFICATION_ID_PEDIDO,id_pedido);
+        intent1.setAction(Constantes.INICIO_BROADCAST_ALARMA);
+        PendingIntent pintent = PendingIntent.getBroadcast(contexto,0,intent1,PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        instance.add(Calendar.MINUTE,-10);
+        long mTime=instance.getTimeInMillis();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP,mTime,pintent);
+
+
+
+        }
+
 
     }
 

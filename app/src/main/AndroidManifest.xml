@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.martina.obligatoriov0_1">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -17,12 +18,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Transportation_status_update_activity"></activity>
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -35,6 +36,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity
+            android:name=".MapaDetalleActivity"
+            android:label="@string/title_activity_mapa_detalle">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.martina.obligatoriov0_1.DetalleActivity" />
+        </activity>
         <activity
             android:name=".MapaGeneralActivity"
             android:label="@string/title_activity_mapa_general"
@@ -50,13 +58,14 @@
         <activity
             android:name=".HubActivity"
             android:label="@string/title_activity_hub"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <receiver android:name=".broadcastReceivers.ConnectionBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE " />
             </intent-filter>
         </receiver>
+
 
         <activity
             android:name=".RegistroActivity"
@@ -72,10 +81,12 @@
             android:name=".LoginActivity"
             android:parentActivityName=".RegistroActivity" />
         <activity android:name=".NoConnectionDialogError" />
+        <activity android:name=".Transportation_status_update_activity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <service android:name=".servicios.ClientLocationService" />
     </application>
 

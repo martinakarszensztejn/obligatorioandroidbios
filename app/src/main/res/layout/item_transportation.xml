@@ -18,6 +18,7 @@
         android:background="@android:color/white"
         android:text="@string/estado"
         android:textSize="22sp"
+        app:fontFamily="@font/allerta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +32,7 @@
         android:background="@android:color/white"
         android:text="@string/origen"
         android:textSize="22sp"
+        app:fontFamily="@font/allerta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lbl_Rv_Item_id" />
 
@@ -42,15 +44,16 @@
         android:text="@string/id"
         android:textSize="22sp"
 
+        app:fontFamily="@font/allerta"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_marginTop="15dp"
-        android:background="@android:color/black"
+        android:layout_height="8dp"
+        android:layout_marginTop="11dp"
+        android:background="@color/colorNegro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -15,6 +19,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.martina.obligatoriov0_1.R;
 import com.martina.obligatoriov0_1.Transportation_status_update_activity;
 import com.martina.obligatoriov0_1.constantes.Constantes;
@@ -22,6 +31,8 @@ import com.martina.obligatoriov0_1.constantes.Constantes;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MetodosUpdate {
@@ -100,6 +111,7 @@ public class MetodosUpdate {
         try {
             JSONObject json = response.getJSONObject("data");
             String estado_nuevo = json.getString("estado");
+
             String status = response.getString("status");
             if(status.equals("ok")){
                 AlertDialog.Builder builder = new AlertDialog.Builder(contexto);
@@ -134,8 +146,8 @@ public class MetodosUpdate {
 
     }
 
-    public static JSONObject makeBody(String current_Status, List<String> datos_extra) {
-        JSONObject body = new JSONObject();
+    public static void makeBody(Bundle bundle1, String current_Status, List<String> datos_extra, Context contexto) {
+        final JSONObject body = new JSONObject();
         String matricula=null;
         String marca=null;
         String modelo=null;
@@ -198,8 +210,8 @@ public class MetodosUpdate {
                 body.put("recepcion_nombre_receptor",nombre_receptor);
                 body.put("recepcion_observacion",observaciones);
                 body.put("recepcion_fecha",fecha);
-                body.put("recepcion_latitud","79.421");
-                body.put("recepcion_longitud","-79.419");
+
+
             } catch (JSONException e) {
                 Log.e(Constantes.ERROR_JSON, "Error en el creado del body json de tp update. Current status == 5",e);
             } catch (NullPointerException e1){
@@ -207,7 +219,11 @@ public class MetodosUpdate {
             }
 
         }
-
-        return body;
+        String s = body.toString();
+        Intent intentt = new Intent(Constantes.FILTRO_INTENT_LOCATION);
+        intentt.setAction(Constantes.FILTRO_INTENT_LOCATION);
+        intentt.putExtra(Constantes.BUNDLE_EXTRA_LOCATION_INTENT,bundle1);
+        intentt.putExtra(Constantes.JSON_BODY,body.toString());
+        LocalBroadcastManager.getInstance(contexto).sendBroadcast(intentt);
     }
 }

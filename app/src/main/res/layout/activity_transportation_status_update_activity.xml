@@ -170,8 +170,19 @@
             android:id="@+id/txt_recepcion_fecha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/fecha_de_recepcion"
+            android:editable="false"
+            android:enabled="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:visibility="gone" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

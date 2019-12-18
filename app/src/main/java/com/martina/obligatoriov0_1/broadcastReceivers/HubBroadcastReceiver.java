@@ -28,7 +28,7 @@ public class HubBroadcastReceiver extends BroadcastReceiver {
 
         Log.i(Constantes.INFORMACION, "Broadcast de envio de lista simple de transportations exitoso!");
         simpleTransportationList  = (List<SimpleTransportation>)intent.getSerializableExtra(Constantes.EXTRA_INTENT_SIMPLE_TRANSPORTATION_LIST);
-        stDatabase db = new stDatabase(context);
+
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constantes.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
         if(sharedPreferences.getBoolean(Constantes.CONEXION,true)){
             List<Integer> idList = new ArrayList<>();
@@ -43,15 +43,7 @@ public class HubBroadcastReceiver extends BroadcastReceiver {
             int size = idList.size();
             Log.i(Constantes.INFORMACION,"El size de la lista de IDS es "+String.valueOf(size));
 
-            db.deleteAllSt();
-            AuxiliarDatabaseBundle bundle= new AuxiliarDatabaseBundle();
-            bundle.setDb(db);
-            bundle.setEstadoList(estadoList);
-            bundle.setIdList(idList);
-            bundle.setOrigenList(origenList);
 
-
-            new DatabaseSetter(context).execute(bundle);
         }
 
         Log.i(Constantes.INFORMACION, "El estado del primero es: " + simpleTransportationList.get(0).getEstado());

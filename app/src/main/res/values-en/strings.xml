@@ -44,13 +44,26 @@
     <string name="pedido_finalizado">Transportation Finalized</string>
     <string name="errorDeClienteEnUpdate">There\'s been a client error in the solicitud. Please check the input data and retry</string>
     <string name="exitocambiandodeestado">The status has been changed successfully.</string>
-    <string name="vehiculo_marca">Enter vehicle brand</string>
-    <string name="vehiculo_modelo">Enter vehicle model</string>
-    <string name="vehiculo_matricula">Enter vehicle plate number</string>
-    <string name="vehiculo_chofer">Enter driver\'s full name</string>
+    <string name="vehiculo_marca">Enter vehicle brand*</string>
+    <string name="vehiculo_modelo">Enter vehicle model*</string>
+    <string name="vehiculo_matricula">Enter vehicle plate number*</string>
+    <string name="vehiculo_chofer">Enter driver\'s full name*</string>
     <string name="campovacio">This field cannot be left empty</string>
     <string name="fecha_de_recepcion">Enter date of reception</string>
-    <string name="ingrese_observaciones">Enter observations</string>
-    <string name="ingrese_nombre_del_receptor">Enter receiver\'s name</string>
+    <string name="ingrese_observaciones">Enter observations*</string>
+    <string name="ingrese_nombre_del_receptor">Enter receiver\'s name*</string>
+    <string name="horaactual">Current time:</string>
+    <string name="alerta">Alert</string>
+    <string name="wishtogoback">Do you wish to go back to the transportation details?</string>
+    <string name="title_activity_mapa_detalle">Detailed Map</string>
+    <string name="nombre_receptor">Receiver\'s name</string>
+    <string name="observaciones_de_recepcion">Observations</string>
+    <string name="fecha_del_receptor">Reception date</string>
+    <string name="veh_marca">Vehicle\'s brand:</string>
+    <string name="veh_matricula">Vehicle\'s plates:</string>
+    <string name="veh_chofer">Vehicle\'s driver:</string>
+    <string name="veh_modelo">Vehicle\'s model:</string>
+    <string name="avisodepedidoinminente">Transportation soon</string>
+    <string name="pronto">A transportation is imminent</string>
 
 </resources>

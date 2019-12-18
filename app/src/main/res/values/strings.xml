@@ -41,13 +41,28 @@
     <string name="pedido_finalizado">Pedido Finalizado</string>
     <string name="errorDeClienteEnUpdate">Error de cliente al procesar la solicitud. Compruebe los datos y reinténtelo</string>
     <string name="exitocambiandodeestado">Exito cambiando de estado</string>
-    <string name="vehiculo_marca">Ingrese marca de vehículo</string>
-    <string name="vehiculo_modelo">Ingrese el modelo del vehículo</string>
-    <string name="vehiculo_matricula">Ingrese la matrícula del vehículo</string>
-    <string name="vehiculo_chofer">Ingrese el nombre completo del chofer</string>
+    <string name="vehiculo_marca">Ingrese marca de vehículo*</string>
+    <string name="vehiculo_modelo">Ingrese el modelo del vehículo*</string>
+    <string name="vehiculo_matricula">Ingrese la matrícula del vehículo*</string>
+    <string name="vehiculo_chofer">Ingrese el nombre completo del chofer*</string>
     <string name="campovacio">El campo no puede permanecer vacio</string>
-    <string name="fecha_de_recepcion">Ingrese fecha de recepcion</string>
-    <string name="ingrese_observaciones">Ingrese observaciones</string>
-    <string name="ingrese_nombre_del_receptor">Ingrese nombre del receptor</string>
+    <string name="fecha_de_recepcion">Ingrese fecha de recepcion - Formato yyyy-MM-dd hh:mm:ss</string>
+    <string name="ingrese_observaciones">Ingrese observaciones*</string>
+    <string name="ingrese_nombre_del_receptor">Ingrese nombre del receptor*</string>
+
+    <string name="horaactual">Hora actual:</string>
+    <string name="alerta">Alerta</string>
+    <string name="wishtogoback">Desea volver a los detalles de su pedido?</string>
+    <string name="title_activity_mapa_detalle">Mapa Detallado</string>
+    <string name="nombre_receptor">Nombre del receptor:</string>
+    <string name="observaciones_de_recepcion">Observaciones de recepcion:</string>
+    <string name="fecha_del_receptor">Fecha de recepcion del pedido:</string>
+    <string name="veh_marca">Vehiculo marca:</string>
+    <string name="veh_matricula">Vehiculo matricula:</string>
+    <string name="veh_chofer">Vehiculo Chofer:</string>
+    <string name="veh_modelo">Vehiculo modelo:</string>
+    <string name="avisodepedidoinminente">Aviso de pedido inminente</string>
+    <string name="pronto">Pedido en pocos minutos</string>
+
 
 </resources>
